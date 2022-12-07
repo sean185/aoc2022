@@ -11,7 +11,8 @@ fn:{[ctx;inp]
     ]
  }
 
-allfiles:`path`typ`name`size!/:{x where not null x@'1} ()fn\read0`:d07eg.txt
+allfiles:enlist`path`typ`name`size!(0#`;`dir;`$"/";0)
+allfiles,:`path`typ`name`size!/:{x where not null x@'1} ()fn\read0`:d07.txt
 
 while[count select from allfiles where typ=`dir, size=0;
     map:exec sum size by path from allfiles;
@@ -21,5 +22,5 @@ while[count select from allfiles where typ=`dir, size=0;
 /p1
 exec sum size from allfiles where typ=`dir, size <= 100000
 /p2
-free:70000000-exec sum size from allfiles where 1=count each path
-exec first size from `size xasc select name, size from allfiles where typ=`dir, size>=30000000-free
+free:70000000-allfiles[`size][0]
+exec min size from allfiles where typ=`dir, size>=30000000-free
