@@ -11,14 +11,12 @@ sum raze (|/)(
     )
 
 /p2
-fn:{(-1+count x)^first 1+where (1_x)>=first x}
+c:{(-1+count x)^first 1+where (1_x)>=first x}
+fn:{flip{c each z _' x}[x]\[();til count x]}
+// look right, left, down, up
 max raze (*/)(
-    // look right
-    flip{fn each z _' x}[trees]\[();til count trees];
-    // look left
-    reverse each flip{fn each z _' x}[reverse each trees]\[();til count trees];
-    // look down
-    {fn each z _' x}[flip trees]\[();til count trees];
-    // look up
-    flip reverse each flip {fn each z _' x}[reverse each flip trees]\[();til count trees]
+    fn trees;
+    reverse each fn reverse each trees;
+    flip fn flip trees;
+    flip reverse each fn reverse each flip trees
     )
