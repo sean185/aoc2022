@@ -45,4 +45,3 @@ for ins in instructions:
         move(dir)
     
 print(len(set(states)))
-
