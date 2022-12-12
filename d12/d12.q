@@ -1,3 +1,4 @@
+// do a bfs from goal back
 heights:"S",.Q.a,"E"
 dulr:(1 0;-1 0;0 1;0 -1)
 f:`:d12eg.txt
@@ -5,7 +6,16 @@ f:`:d12.txt
 topo:heights?read0 f
 find:{raze (til count topo),/:'where each (heights?x)=topo}
 
-// do a bfs from goal back
+// find valid paths from one path
+fn:{
+    curr:last x;
+    diffs:(topo . curr)-p:topo ./: branches:curr+/:dulr; 
+    branches:branches where (&/)(diffs <=1;not null diffs;not branches in touched);
+    touched,:branches;
+    x,/:enlist each branches
+    }
+
+// do a BFS from the goal backwards
 run:{
     start::find "E";
     end::x;
