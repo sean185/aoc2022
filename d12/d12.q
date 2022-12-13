@@ -31,3 +31,16 @@ run find "S"
 
 // part 2, any path will do!
 run find "a"
+
+/2162 12752
+\ts:10 run find "S"
+/5576 168368
+\ts:10 run find "a"
+
+v2:
+
+where2d:{raze(til count x),/:'where each x}
+adj:{(1 0;-1 0;0 1;0 -1)+\:x}
+{new:{vals:topo ./: nbs:adj x; nbs where (&/)(-1<=vals-topo . x;not null vals)} each where2d {x=max each x} x;x .[;;:;0]/new}0N 0@27=topo
+
+// visited and scores
