@@ -23,7 +23,7 @@ As usual, attempting to get as far as I can with q/kdb+, before defaulting to py
 | 15  | 🥇 |  |
 | 16  | 🥇 |  |
 | 17  | 🥇 |  |
-| 18  |  | 🥇 |
+| 18  | 🥈 | 🥇 |
 | 19  | 🥇 |  |
 | 20  | 🥇 |  |
 | 21  | 🥇 |  |
