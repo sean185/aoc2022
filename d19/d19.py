@@ -50,7 +50,7 @@ def step_make(state, plan):
 # simple recursion
 # state is (a, b, c, d, w, x, y, z, t)
 #          (  robot  ) ( material ) time
-def optimize(blueprint, state, depth=0):
+def part1(blueprint, state, depth=0):
     global best
     global visited
     if state in visited:
@@ -86,7 +86,7 @@ def optimize(blueprint, state, depth=0):
         newstate[i] += 1
         # print(newstate)
         newstates.append(tuple(newstate))
-    result = [optimize(blueprint, s, depth + 1) for s in newstates]
+    result = [part1(blueprint, s, depth + 1) for s in newstates]
     result = [s for s in result if s is not None]
     # return result
     if len(result) == 0:
@@ -97,19 +97,26 @@ def optimize(blueprint, state, depth=0):
         visited[state] = joined
         return joined
 
-def run(max_time):
-    total = 0
-    for i, blueprint in enumerate(blueprints):
-        # optimality: how fast does an tree reach geode? x @ y
-        visited = dict()
-        best = (0, 0, 0, 1, 0, 0, 0, 0, 0)
-        r = optimize(blueprint, best)
-        print(r)
-        total += (i+1)*r[4]
-    print(total)
-
 # part 1
-run(24)
+max_time = 24
+total = 0
+for i, blueprint in enumerate(blueprints):
+    # optimality: how fast does an tree reach geode? x @ y
+    visited = dict()
+    best = (0, 0, 0, 1, 0, 0, 0, 0, 0)
+    r = part1(blueprint, best)
+    print(r)
+    total += (i+1)*r[4]
+print(total)
 
 # part 2
-run(32)
+max_time = 32
+total = 1
+for i, blueprint in enumerate(blueprints[:3]):
+    # optimality: how fast does an tree reach geode? x @ y
+    visited = dict()
+    best = (0, 0, 0, 1, 0, 0, 0, 0, 0)
+    r = part1(blueprint, best)
+    print(r)
+    total *= r[4]
+print(total)
